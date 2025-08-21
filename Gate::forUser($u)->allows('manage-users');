@@ -1,0 +1,23 @@
+[90m= [39m[34;4mApp\Models\User[39;24m {#5425
+    [34mid[39m: [35m1[39m,
+    [34mname[39m: "[32madmin[39m",
+    [34memail[39m: "[32mfraction6023@gmail.com[39m",
+    [34memail_verified_at[39m: "[32m2025-08-21 11:46:38[39m",
+    #[33mpassword[39m: "[32m$2y$12$fqCpT0FY05gn1an/cUEOweLUltM0p4m/KcXV5EdViCg/55LnXXbtC[39m",
+    #[33mremember_token[39m: [36mnull[39m,
+    [34mis_admin[39m: [35m1[39m,
+    [34mcreated_at[39m: "[32m2025-08-21 09:42:47[39m",
+    [34mupdated_at[39m: "[32m2025-08-21 11:46:38[39m",
+    [34mnationality[39m: "[32mسعودي[39m",
+    [34mnational_id[39m: "[32m10011001[39m",
+    [34mbirth_date[39m: "[32m2008-08-08[39m",
+    [34mphone[39m: "[32m0555555555[39m",
+    [34maddress[39m: "[32mعنوان[39m",
+    [34mweight[39m: "[32m77.00[39m",
+    [34mheight[39m: "[32m177.00[39m",
+    [34mhealth_status[39m: "[32mسليم ولله الحمد[39m",
+    [34mswimming_level[39m: "[32mnone[39m",
+    [34maccount_status[39m: "[32mpending[39m",
+    [34mpresence_status[39m: "[32mout[39m",
+  }
+

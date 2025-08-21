@@ -1,28 +1,39 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SC_Controller;
+use App\Http\Controllers\AdminUserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
+// Breeze auth
 require __DIR__ . '/auth.php';
 
+Route::middleware(['auth','verified'])->group(function () {
 
+    // Dashboard
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/scan', [SC_Controller::class, 'scanPage'])->name('attendance.scan');
-    Route::post('/attendance/scan', [SC_Controller::class, 'toggleByScan'])->name('attendance.toggle');
+    // Profile
+    Route::get('/profile',  [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile',[ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile',[ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Scan (in/out)
+    Route::get('/scan/{action}', [SC_Controller::class, 'scanPage'])
+        ->whereIn('action', ['in','out'])
+        ->name('attendance.scan');
+
+    Route::post('/attendance/scan/{action}', [SC_Controller::class, 'setByScan'])
+        ->whereIn('action', ['in','out'])
+        ->name('attendance.set');
+
+    // Admin area (يتطلب مشرف)
+    Route::middleware('can:manage-users')
+        ->prefix('admin')->name('admin.')
+        ->group(function () {
+            Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+            Route::patch('/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
+        });
 });

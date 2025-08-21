@@ -18,21 +18,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'nationality',
-        'national_id',
-        'birth_date',
-        'phone',
-        'address',
-        'weight',
-        'height',
-        'health_status',
-        'swimming_level',
-        'account_status',
-        'presence_status',
-    ];
+    'name','email','password',
+    'nationality','national_id','birth_date','phone','address',
+    'weight','height','health_status','swimming_level',
+    'account_status','presence_status',
+    'is_admin',
+];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -55,6 +46,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'birth_date' => 'date',
+            'is_admin'   => 'boolean',
         ];
     }
     protected $casts = [
