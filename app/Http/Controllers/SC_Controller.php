@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 
 
@@ -99,5 +101,21 @@ class SC_Controller extends Controller
                 'presence_status' => $new,
             ]);
         });
+    }
+    public function acceptBySignedQr(Request $request)
+    {
+        $data = $request->validate([
+            'uid'    => ['required','integer','exists:users,id'],
+            'action' => ['required', Rule::in(['in','out'])],
+        ]);
+
+        $user = User::findOrFail($data['uid']);
+        $user->presence_status = $data['action'];
+        $user->save();
+
+        return view('attendance.accepted', [
+            'user'   => $user,
+            'action' => $data['action'],
+        ]);
     }
 }

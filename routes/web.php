@@ -59,3 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::patch('/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
         });
 });
+
+Route::get('/attendance/accept', [SC_Controller::class, 'acceptBySignedQr'])
+    ->name('attendance.accept')
+    ->middleware('signed');
